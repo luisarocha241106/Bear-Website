@@ -34,3 +34,26 @@
 
   Video not supported
   </video>
+  </div>
+
+  <!-- esta parte é nova! aqui o site "fala" com o servidor para ir buscar dados -->
+  <div id="curiosidades">
+    <h2>Curiosidades do Backend</h2>
+    <button onclick="pedirCuriosidade()">Saber uma curiosidade!</button>
+    <p id="resultado" style="font-size: 1.2em; color: #4a7c59; margin-top: 10px;"></p>
+  </div>
+
+  <!-- isto aqui em baixo é javascript é o codigo que faz o botao funcionar -->
+  <script>
+    // esta funcao corre quando carregas no botao
+    async function pedirCuriosidade() {
+      // vai ao servidor buscar uma curiosidade (faz um pedido à API que eu criei no server.js)
+      const resposta = await fetch('/api/curiosidade');
+
+      // transforma a resposta em algo que o javascript consiga ler
+      const dados = await resposta.json();
+
+      // pega na curiosidade e mete-a na pagina para tu veres
+      document.getElementById('resultado').textContent = dados.curiosidade;
+    }
+  </script>
